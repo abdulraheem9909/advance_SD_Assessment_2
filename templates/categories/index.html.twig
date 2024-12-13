@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adverts{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/cards.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+
+{% endblock %}
+
+{% block body %}
+    <div class="header">
+        <h1 style="color:#583672">Categories</h1>
+        <a class="custom_button" href="{{ path('app_categories_new') }}" >Create new Category</a>
+    </div>
+
+    <div class="container">
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">Id</div>
+                <div class="col col-2">Title</div>
+                <div class="col col-3">Actions</div>
+            </li>
+            {% for category in categories %}
+                <li class="table-row">
+                    <div class="col col-1" data-label="Id">{{ category.id }}</div>
+                    <div class="col col-2" data-label="Title">{{ category.title }}</div>
+                    <div style="display: flex" class="col col-3" data-label="Actions">
+                            <a href="{{ path('app_categories_edit', {'id': category.id}) }}">  <i style="color:#583672" class="fas fa-edit"></i></a>
+                            {{ include('categories/_delete_form.html.twig') }}
+                    </div>
+                </li>
+            {% else %}
+                <li class="table-row">
+                    <div class="col col-1" data-label="Id">N/A</div>
+                    <div class="col col-2" data-label="Title">No records found</div>
+                    <div class="col col-3" data-label="Actions">N/A</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/create.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $('#{{ form.category.vars.id }}').select2({
+                placeholder: "Select categories",
+                allowClear: true
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block body %}
+    <section class="login">
+        <div class="login_box">
+            <div class="left">
+                <a class="back_button" href="{{ path('app_adverts_index') }}">back to list</a>
+
+                <div class="contact">
+
+                    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+                    <h3 class="title">{{ button_label|default('Create') }} Advert</h3>
+
+                    {{ form_row(form.title, {
+                        'label': false,
+                        'attr': {'placeholder': 'Enter title'},
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+
+                    {{ form_row(form.description, {
+                        'label': false,
+                        'attr': {'placeholder': 'Enter description'},
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+
+                    {{ form_row(form.price, {
+                        'label': false,
+                        'attr': {'placeholder': 'Enter price'},
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+
+                    {{ form_row(form.location, {
+                        'label': false,
+                        'attr': {'placeholder': 'Enter location'},
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+
+
+
+                    {{ form_widget(form.category, {'attr': {'class': 'form-control select2'}}) }}
+                    {{ form_errors(form.category) }}
+
+                    {{ form_row(form.image, {
+                        'label': "Upload image",
+                        'attr': {'placeholder': 'Upload image'},
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+                    <button type="submit" class="submit">{{ button_label|default('Create') }}</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <div class="right">
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

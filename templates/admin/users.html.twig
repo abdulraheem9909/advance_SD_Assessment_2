@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/cards.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="header">
+        <h1 style="color:#583672">Users</h1>
+    </div>
+
+    <div class="container">
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div  style="flex-basis: 20%" class="col">Id</div>
+                <div style="flex-basis: 20%"  class="col">Name</div>
+                <div style="flex-basis: 20%"  class="col">Role</div>
+                <div style="flex-basis: 20%"  class="col">Moderator</div>
+                <div style="flex-basis: 20%"  class="col">Action</div>
+            </li>
+            {% for user in users %}
+                <li class="table-row">
+                    <div  style="flex-basis: 20%"class="col col-1" data-label="Id">{{ user.id }}</div>
+                    <div style="flex-basis: 20%" class="col col-2" data-label="Name">{{ user.title }}</div>
+                    <div style="flex-basis: 20%" class="col col-3" data-label="Role">
+                        <span class="badge2">
+                            {% if 'ROLE_MODERATOR' in user.getRoles() %}
+                                Moderator
+                            {% else %}
+                                User
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div style="flex-basis: 20%" class="col col-4" data-label="Actions">
+                        <a href="{{ path('admin_toggle_user_role', {'id': user.id}) }}" class="switch-btn">
+                            {% if 'ROLE_MODERATOR' in user.getRoles() %}
+                                <i class="fas fa-toggle-on" style="color: green;"></i>
+                            {% else %}
+                                <i class="fas fa-toggle-off" style="color: gray;"></i>
+                            {% endif %}
+                        </a>
+
+                    </div>
+                    <div style="flex-basis: 20%;    display: flex; align-items: center;" class="col col-4" data-label="Actions">
+                        <a href="{{ path('admin_delete_user', { id: user.id }) }}" onclick="return confirm('Are you sure you want to delete this user?');">
+                            <button style="background: transparent ;border:none; cursor:pointer" class="btn"><i style="color: #583672; font-size: 20px" class="fas fa-trash"></i></button>
+                        </a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="table-row">
+                    <div class="col col-1" data-label="Id">N/A</div>
+                    <div class="col col-2" data-label="Name">No users found</div>
+                    <div class="col col-3" data-label="Role">N/A</div>
+                    <div class="col col-4" data-label="Actions">N/A</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

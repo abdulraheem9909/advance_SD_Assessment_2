@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        {% block stylesheets %}
+
+            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        {% endblock %}
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+
+    <div class="wrapper
+    {% if app.user or app.request.pathInfo=="/adverts/" %}
+        logged-in
+    {% else %}
+       not-logged-in
+    {% endif %}">
+
+
+        <ul class="nav-links" >
+            <li><a href="{{ path('app_adverts_index') }}">Market Place</a></li>
+            <li>
+                    {% if app.user %}
+                        <label class="dropdown">
+                            <div class="dd-button">
+                               Hi, {{ app.user.title }}  <div class="avatar">{{ app.user.title|first }}</div>
+                            </div>
+
+                            <input type="checkbox" class="dd-input" id="test">
+
+                            <ul class="dd-menu">
+                                {% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') or is_granted('ROLE_MODERATOR') %}
+                                    <a class="link_menu" href="{{ path('app_user_adverts') }}">My List</a>
+                                {% endif %}
+
+                                {% if  is_granted('ROLE_MODERATOR') %}
+                                    <a class="link_menu" href="{{ path('app_categories_index') }}">Categories</a>
+                                {% endif %}
+
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a class="link_menu" href="{{ path('admin_users_list') }}">User Management</a>
+                                {% endif %}
+
+                                <a class="link_menu" href="{{ path('app_logout') }}">Logout</a>
+                            </ul>
+                        </label>
+
+                    {% else %}
+                        <a href="{{ path('app_login') }}">Login</a>
+                    {% endif %}
+            </li>
+
+
+        </ul>
+        {% block body %}{% endblock %}
+    </div>
+    </body>
+</html>

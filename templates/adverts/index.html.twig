@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adverts{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/cards.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+
+{% endblock %}
+
+{% block body %}
+    <div class="header">
+    <h1 style="color:#583672">Adverts</h1>
+        {% if app.user is not null and 'ROLE_ADMIN' not in app.user.roles %}
+            <a class="custom_button" href="{{ path('app_adverts_new') }}" >Create new advert</a>
+        {% endif %}
+
+    </div>
+    <ul class="cards">
+        {% for advert in adverts %}
+            <li class="card_wrapper">
+                {% if app.user is not null and (advert.user == app.user or 'ROLE_MODERATOR' in app.user.roles) %}
+                    <div class="icon_wrapper">
+                        <a href="{{ path('app_adverts_edit', {'id': advert.id}) }}">  <i class="fas fa-edit"></i></a>
+                        {{ include('adverts/_delete_form.html.twig') }}
+                    </div>
+                {% endif %}
+                <a href="#" class="card">
+                    <img src="{{ asset('uploads/images/' ~ advert.image) }}" alt="{{ advert.title }}" class="card__image">
+                    <div class="card__overlay">
+
+                        <div class="card__header">
+                            <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+                            <div class="card__header-text">
+                                <h3 class="card__title">{{ advert.title|slice(0, 15) ~ (advert.title|length > 15 ? '...' : '') }}</h3>
+
+                                {% for category in advert.category|slice(0, 3) %}
+                                    <span class="badge">{{ category.title }}</span>{% if not loop.last %}, {% endif %}
+                                {% else %}
+                                    <span class="badge">No categories available</span>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="card__body">
+                        <span class="card__status"> location :  <span class="card__status_text"> {{ advert.location }}</span></span>
+
+                        <span class="card__status"> Price :  <span class="card__status_text"> {{ advert.price }}</span></span>
+                            <span class="card__status"> Created By :  <span class="card__status_text"> {{ advert.user.title }}</span></span>
+                            <p class="card__description">
+                                {{ advert.description|slice(0, 150) ~ (advert.description|length > 150 ? '...' : '') }}
+                            </p>
+                            </div>
+                    </div>
+                </a>
+            </li>
+        {% else %}
+            <li>No adverts found</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <section class="login">
+        <div class="login_box">
+            <div class="left">
+                <div class="contact">
+                    {{ form_start(registrationForm) }}
+                    <h3 class="title">SIGN UP</h3>
+                    {{ form_row(registrationForm.title, { 'label': false, 'attr': {'placeholder': 'Enter  name'},   'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_row(registrationForm.email, { 'label': false,'attr': {'placeholder': 'Enter email'},   'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        'label': false,
+                        'attr': {'placeholder': 'Enter password'},   'label_attr': {'class': 'form-label'}
+                    }) }}
+                    <button type="submit" class="submit">Register</button>
+                    {{ form_end(registrationForm) }}
+                    <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #555;">
+                        Already have an account? <a href="{{ path('app_login') }}" style="color: #583672; text-decoration: none; font-weight: bold;">Log in</a>
+                    </p>
+                </div>
+            </div>
+            <div class="right">
+            </div>
+        </div>
+    </section>
+{% endblock %}

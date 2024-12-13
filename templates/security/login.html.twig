@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+{% endblock %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <section class="login">
+        <div class="login_box">
+            <div class="left">
+                <div class="contact">
+                    <form method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+
+
+                        <h3>Sign in</h3>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" placeholder="Email" required autofocus>
+                        <input type="password" name="password" id="inputPassword" placeholder="Password" required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <button type="submit" class="submit">Sign In</button>
+                    </form>
+                    <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #555;">
+                        Don't have an account ? <a href="{{ path('app_register') }}" style="color: #583672; text-decoration: none; font-weight: bold;">Singup</a>
+                    </p>
+                </div>
+            </div>
+            <div class="right">
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
