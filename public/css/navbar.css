@@ -116,6 +116,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: auto;
 }
 .wrapper.logged-in {
     background-color: #fdfff5;

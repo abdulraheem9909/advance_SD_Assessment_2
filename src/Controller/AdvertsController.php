@@ -5,6 +5,7 @@ use App\Entity\Adverts;
 use App\Form\AdvertsType;
 use App\Repository\AdvertsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,21 @@ class AdvertsController extends AbstractController
         ]);
     }
 
+
+    #[Route('/advert/{id}', name: 'app_advert_detail', methods: ['GET'])]
+    public function detail(int $id, ManagerRegistry $doctrine): Response
+    {
+        // Use ManagerRegistry to fetch the repository
+        $advert = $doctrine->getRepository(Adverts::class)->find($id);
+
+        if (!$advert) {
+            throw $this->createNotFoundException('Advert not found');
+        }
+
+        return $this->render('adverts/show.html.twig', [
+            'advert' => $advert,
+        ]);
+    }
     #[Route('/my-adverts', name: 'app_user_adverts', methods: ['GET'])]
     public function userAdverts(AdvertsRepository $advertsRepository): Response
     {

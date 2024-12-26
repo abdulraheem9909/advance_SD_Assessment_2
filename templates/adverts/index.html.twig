@@ -25,7 +25,7 @@
                         {{ include('adverts/_delete_form.html.twig') }}
                     </div>
                 {% endif %}
-                <a href="#" class="card">
+                <a href="{{ path('app_advert_detail', {'id': advert.id}) }}" class="card">
                     <img src="{{ asset('uploads/images/' ~ advert.image) }}" alt="{{ advert.title }}" class="card__image">
                     <div class="card__overlay">
 

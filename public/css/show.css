@@ -1,0 +1,118 @@
+/* General Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Container */
+.advert-detail {
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.advert-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.advert-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.advert-header h1 {
+    font-size: 2.5em;
+    color: #583672;
+    margin-bottom: 10px;
+}
+
+.advert-meta {
+    font-size: 1.1em;
+    color: #666;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Image */
+.advert-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    margin: 10px auto;
+}
+
+/* Description */
+.advert-description {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Categories */
+.advert-categories {
+    margin-bottom: 20px;
+}
+
+.advert-categories h3 {
+    color: #583672;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.advert-categories ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.advert-categories ul li {
+    background-color: #f2397f38;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* User Info */
+.advert-user {
+    margin-bottom: 20px;
+}
+
+.advert-user h3 {
+    color: #583672;
+    font-size: 1.4em;
+    margin-bottom: 5px;
+}
+
+.advert-user p {
+    font-size: 1.2em;
+}
+
+/* Back Link */
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+.back_button{
+    display: flex;
+}
+
